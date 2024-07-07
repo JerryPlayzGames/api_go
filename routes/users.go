@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 
 	"example.com/rest-api/models"
@@ -39,7 +38,7 @@ func login(context *gin.Context) {
 	}
 
 	err = user.ValidateCredentials()
-	fmt.Print(err)
+
 	if err != nil {
 		context.JSON(http.StatusUnauthorized, gin.H{"message": "Could not authenticate user."})
 		return

@@ -47,9 +47,10 @@ func (u User) ValidateCredentials() error {
 	row := db.DB.QueryRow(query, u.Email)
 
 	var retrievedPassword string
-	err := row.Scan(&retrievedPassword)
+
+	err := row.Scan(&u.Email, &retrievedPassword)
 	if err != nil {
-		return err
+		return errors.New("Credential invalid")
 	}
 	passwordIsValid := utils.CheckPasswordHash(u.Password, retrievedPassword)
 
